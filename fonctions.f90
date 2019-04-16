@@ -102,10 +102,10 @@ Contains
 
   ! f,g et h periodiques
 
-  function fper(Lx,Ly, Nx, Ny)
+  subroutine fper(Lx,Ly, Nx, Ny,A)
     Real(PR), Intent(in) :: Lx,Ly
     integer, intent(in) :: Nx,Ny
-    Real(PR), dimension(Nx,Ny) :: fper
+    Real(PR), dimension(Nx,Ny), intent (inout) :: A
     integer :: i,j
     real(PR) :: dx,dy,x,y
 
@@ -115,11 +115,11 @@ Contains
        do j = 1,Ny
           x = real(i)*dx
           y = real(j)*dy
-          fper(i,j) = sin(x) + cos (y)
+          A(i,j) = sin(x) + cos(y)
        end do
     end do
 
-  end function fper
+  end subroutine fper
 
   function gper(Lx,Ly,Nx,Ny)
     Real(PR), Intent(in) :: Ly,Lx
@@ -134,7 +134,7 @@ Contains
        do j = 1,Ny
           x = real(i)*dx
           y = real(j)*dy
-          gper(i,j) = sin(x) + cos (y)
+          gper(i,j) = sin(x) + cos(y)
        end do
     end do
 
@@ -153,7 +153,7 @@ Contains
        do j = 1,Ny
           x = real(i)*dx
           y = real(j)*dy
-          hper(i,j) = sin(x) + cos (y)
+          hper(i,j) = sin(x) + cos(y)
        end do
     end do
   end function hper

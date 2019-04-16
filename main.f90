@@ -15,12 +15,7 @@ Program Main
   real(PR) :: dx, dy, D, Lx, Ly, beta, dt, tmax
 
 call lect_para(Nx, Ny, Lx, Ly, D, dt)
-!!$  Nx = 50
-!!$  Ny = 50
-!!$  D = 1.0
-!!$  Lx = 1.0
-!!$  Ly = 1.0
-!!$  dt = 0.00001
+
 
   N = Nx * Ny
   nbNN = 5*(Nx*Ny) - 2*Nx - 2*Ny !! nombre d'éléments non nuls 
@@ -44,10 +39,10 @@ call lect_para(Nx, Ny, Lx, Ly, D, dt)
   !génération de la matrice pentadiagonale
   call Mat(Nx,Ny,dx,dy,D,AA,JA,IA,dt)
 
-  ! conditions aux bords
-  g = gper(Lx, Ly, Nx, Ny)
-  h = hper(Lx, Ly, Nx, Ny)
-  fsource = fper(Lx,Ly,Nx,Ny)
+  !conditions aux bords
+  call fper(Lx,Ly,Nx,Ny,fsource)
+  call fper(Lx,Ly,Nx,Ny,g)
+  call fper(Lx,Ly,Nx,Ny,h)
 
   ! génération du termes source, conditions aux bords + fsource
   call secondMembre(F,Nx,Ny,dx,dy,D,fsource,g,h)
@@ -69,7 +64,8 @@ call lect_para(Nx, Ny, Lx, Ly, D, dt)
   end do
 
   call WriteBinary(x, y, U_Mat, "resultat.dat")
-
+call vect_to_mat(F, U_Mat, Nx, Ny)
+  call WriteBinary(x, y, U_Mat, "test.dat")
 
   deallocate(AA,IA,JA,U,F,U0, g, h, U_Mat,x, y)
 
