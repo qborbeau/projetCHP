@@ -14,7 +14,7 @@ Program Main
   integer :: Nx, Ny, N, nbNN, k, i, imax
   real(PR) :: dx, dy, D, Lx, Ly, beta, dt, tmax
 
-call lect_para(Nx, Ny, Lx, Ly, D, dt)
+call lect_para(Nx, Ny, Lx, Ly, D, dt, tmax)
 
 
   N = Nx * Ny
@@ -26,7 +26,6 @@ call lect_para(Nx, Ny, Lx, Ly, D, dt)
   dx = Lx / Nx 
   dy = Ly / Ny
 
-  tmax = 0.2
   imax = int(tmax/dt)
 
   beta = 0.01    ! GC, tolerance et nombre max d iteration
@@ -34,7 +33,7 @@ call lect_para(Nx, Ny, Lx, Ly, D, dt)
 
   !Initialisation : 
   U = 0.
-  U0 = 20.! solution initiale 
+  U0 = 2.! solution initiale 
 
   !génération de la matrice pentadiagonale
   call Mat(Nx,Ny,dx,dy,D,AA,JA,IA,dt)

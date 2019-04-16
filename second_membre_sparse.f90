@@ -62,15 +62,15 @@ Contains
        do j=1,Ny
           F(C) = fsource(i,j)
           if ((i==1) .OR. (i==Nx)) then
-             F(C) = F(C) + g(i,j)**2/D
+             F(C) = F(C) + g(i,j)*D/dy**2
              print*, g(i,j)
              if ((j==1) .OR. (j==Ny)) then
-                F(C) = F(C) + h(i,j)**2/D
+                F(C) = F(C) + h(i,j)*D/dx**2
              end if
           elseif ((j==1) .OR. (j==Ny)) then
-             F(C) = F(C) + h(i,j)**2/D
+             F(C) = F(C) + h(i,j)*D/dx**2
              if ((i==1) .OR. (i==Nx)) then
-                F(C) = F(C) + g(i,j)**2/D
+                F(C) = F(C) + g(i,j)*D/dy**2
              end if
           end if
           C = C + 1

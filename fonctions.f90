@@ -23,18 +23,19 @@ Contains
     end do
   end subroutine vect_to_mat
 
-  subroutine lect_para(Nx, Ny, Lx, Ly, D, dt)
+  subroutine lect_para(Nx, Ny, Lx, Ly, D, dt,tmax)
     integer, intent(out) :: Nx, Ny
-    real(PR), intent(out) :: Lx, Ly, D, dt
+    real(PR), intent(out) :: Lx, Ly, D, dt, tmax
 
     open(10, file="parametres.dat")
 
-    read(10 ,*) Nx
-    read(10 ,*) Ny
-    read(10 ,*) Lx
-    read(10 ,*) Ly
-    read(10 ,*) D 
-    read(10 ,*) dt
+    read(10, *) Nx
+    read(10, *) Ny
+    read(10, *) Lx
+    read(10, *) Ly
+    read(10, *) D 
+    read(10, *) dt
+    read(10, *) tmax
 
     close(10)
 
